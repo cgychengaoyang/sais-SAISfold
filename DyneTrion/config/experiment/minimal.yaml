@@ -1,0 +1,154 @@
+# Minimal training config for debugging NaN
+# @package _global_
+
+data:
+  ref_number: 0
+  motion_number: 0
+  frame_time: 1
+  frame_sample_step: 1
+  stage1: False
+  time_norm: False
+  step_split: null
+  fix_sample_start: null
+  random_sample_train: False
+  train_reference_mode: contiguous
+  split_percent: 0.7
+  keep_first: null
+  dynamics: True
+  eval_start_idx: 0
+  eval_end_idx: 10
+  cfg_drop_rate: 0.1
+  csv_path: overfitting_data/1L9A/metadata.csv
+  val_csv_path: overfitting_data/1L9A/metadata.csv
+  filtering:
+    train_max_len: 2048
+    val_max_len: 600
+  crop:
+    enabled: false
+    crop_size: 384
+    spatial_crop_prob: 0.5
+    interface_threshold: 8.0
+  min_t: 0.01
+  num_t: 100
+
+diffuser:
+  dynamics: ${data.dynamics}
+  frame_time: ${data.frame_time}
+  diffuse_trans: True
+  diffuse_rot: True
+  r3:
+    min_b: 0.1
+    max_b: 20.0
+    coordinate_scaling: 0.1
+  so3:
+    num_omega: 1000
+    num_sigma: 1000
+    min_sigma: 0.1
+    max_sigma: 1.5
+    schedule: logarithmic
+    cache_dir: .cache/
+    use_cached_score: False
+
+model:
+  fp16: False
+  cfg_drop_rate: 0.0
+  cfg_drop_in_train: True
+  cfg_gamma: 3.5
+  frame_time: ${data.frame_time}
+  ref_number: ${data.ref_number}
+  motion_number: ${data.motion_number}
+  dirtect: False
+  dynamics: ${data.dynamics}
+  node_input_embed_size: 384
+  node_embed_size: 256
+  edge_embed_size: 128
+  dropout: 0.0
+  multimer:
+    enabled: false
+  embed:
+    DFOLDv2_embedder: True
+    index_embed_size: 32
+    aatype_embed_size: 32
+    embed_self_conditioning: True
+    num_bins: 22
+    min_bin: 1e-5
+    max_bin: 20.0
+    skip_feature: False
+  ipa:
+    c_s: ${model.node_embed_size}
+    c_z: ${model.edge_embed_size}
+    c_hidden: 256
+    c_skip: 64
+    no_heads: 8
+    no_qk_points: 8
+    no_v_points: 12
+    seq_tfmr_num_heads: 4
+    seq_tfmr_num_layers: 2
+    num_blocks: 4
+    coordinate_scaling: ${diffuser.r3.coordinate_scaling}
+    spatial: False
+    temporal: False
+    temporal_position_encoding: False
+    temporal_position_max_len: 130
+    frozen_spatial: False
+    gradient_checkpointing: False
+
+experiment:
+  project: Overfit_1L9A
+  name: minimal
+  base_root: outputs/train_1l9a_overfit
+  run_id: null
+  training: True
+  use_ddp: True
+  log_freq: 100
+  batch_size: 1
+  eval_batch_size: 1
+  num_loader_workers: 0
+  num_epoch: 500
+  learning_rate: 0.0001
+  max_squared_res: 360000
+  prefetch_factor: 100
+  use_gpu: True
+  enable_torch_compile: False
+  num_gpus: 1
+  enable_validation: False
+  use_recoder: False
+  recoder:
+    save_path: ${experiment.base_root}/${experiment.project}/${experiment.name}/swanlab/
+    mode: local
+    api_key: ''
+  ckpt_freq: 50
+  early_ckpt: True
+  ckpt_dir: ${experiment.base_root}/${experiment.project}/${experiment.name}/ckpt/
+  use_warm_start_conf: False
+  warm_start: null
+  reuse_step: False
+  noise_scale: 1.0
+  rot_loss_weight: 1.0
+  rot_loss_t_threshold: 0.0
+  separate_rot_loss: False
+  trans_loss_weight: 1.0
+  trans_x0_threshold: 1.0
+  velocity_loss_weight: 0.0
+  velocity_loss_t_filter: 0.5
+  torsion_loss_weight: 0.0
+  coordinate_scaling: ${diffuser.r3.coordinate_scaling}
+  aux_loss_weight: 0.0
+  bb_atom_loss_weight: 0.0
+  bb_atom_loss_t_filter: 0.25
+  dist_mat_loss_weight: 0.0
+  dist_mat_loss_t_filter: 0.25
+  interface_dist_loss_weight: 0.0
+  interface_dist_cutoff: 8.0
+  chain_clash_loss_weight: 0.0
+  chain_clash_ca_threshold: 2.0
+  chain_com_loss_weight: 0.0
+  chain_com_margin: 1.0
+  smooth_lddt_loss_weight: 0.0
+  eval_dir: ${experiment.base_root}/${experiment.project}/${experiment.name}/val_outputs/
+  num_parameters: null
+  trainable_num_parameters: null
+
+hydra:
+  run:
+    dir: ${experiment.base_root}/${experiment.project}/${experiment.name}/log/${now:%Y-%m-%d}/${now:%H-%M-%S}
