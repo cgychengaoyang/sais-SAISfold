@@ -6,7 +6,7 @@ import sys
 import argparse
 import glob
 
-sys.path.insert(0, '/inspire/ssd/project/sais-bio/public/tzuhsiungyang/Projects/SAISfold')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
 import torch
