@@ -15,8 +15,8 @@ else:
 
 # /mnt/d/develop/PyCharm_workspaces/study_01/my_00_data  # 存储数据的根目录
 # linux 直接使用绝对路径更简单
-root_path = '/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_15/old_data'  # 存储数据的根目录
+root_path = '/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data'  # 存储数据的根目录
 
 if is_win == 1:
-    root_path = '../../../../study_01/my_00_data/sais/data_15/old_data'  # 存储数据的根目录
+    root_path = '../../../../study_01/my_00_data'  # 存储数据的根目录
 

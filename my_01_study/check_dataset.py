@@ -7,10 +7,10 @@ Nucleic_protein_res4.0 文件检测与查看工具
 """
 
 import os
+from my_01_study.utils.root_utils import root_path
 
-root_path = '../../../../study_01/my_00_data/sais/data_16/old_data'  # 存储数据的根目录
 
-FILE_PATH = f"{root_path}/Nucleic_protein_res4.0"  # 这只是一个没有后缀的zip文件...
+FILE_PATH = f"{root_path}/sais/data_16/old_data/Nucleic_protein_res4.0"  # 这只是一个没有后缀的zip文件...
 
 
 def check_file_header(filepath, nbytes=64):
