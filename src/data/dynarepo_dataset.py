@@ -31,7 +31,7 @@ class DynarepoDataset(Dataset):
     def __init__(
         self,
         csv_path: str,
-        embed_dir: str = "/inspire/ssd/project/sais-bio/public/caizhiqiang/DyneTrion-multimer/DyneTrion/data/dynarepo/pairformer_npz",
+        embed_dir: str = f"{root_path_02}/public/caizhiqiang/DyneTrion-multimer/DyneTrion/data/dynarepo/pairformer_npz",
         max_seq_len: Optional[int] = None,
         use_cache: bool = True,
     ):
@@ -285,7 +285,7 @@ if __name__ == '__main__':
     print("Testing DynarepoDataset...")
     
     dataset = DynarepoDataset(
-        csv_path="/inspire/ssd/project/sais-bio/public/caizhiqiang/DyneTrion-multimer/DyneTrion/train_data.csv",
+        csv_path=f"{root_path_02}/public/caizhiqiang/DyneTrion-multimer/DyneTrion/train_data.csv",
         max_seq_len=500,
     )
     

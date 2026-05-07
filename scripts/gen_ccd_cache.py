@@ -28,7 +28,7 @@ import tqdm
 from biotite.structure.io import pdbx
 from pdbeccdutils.core import ccd_reader
 
-from my_01_study.utils.root_utils import root_path
+from my_01_study.utils.root_utils import root_path_02
 
 
 def download_ccd_cif(output_path: Path):
@@ -257,7 +257,7 @@ if __name__ == "__main__":
     code_directory = current_directory.parent
     print(code_directory)  # /home/develop_workspaces/study_03/my_302_Protenix/sais-protenix  # 代码根目录...
     # releases_data_ccd_directory = code_directory / "release_data" / "ccd_cache"
-    releases_data_ccd_directory = f'{root_path}/sais/data_16/old_data/release_data/ccd_cache'
+    releases_data_ccd_directory = f'{root_path_02}/sais_bio/release_data/ccd_cache'
 
     parser = argparse.ArgumentParser()
     parser.add_argument(

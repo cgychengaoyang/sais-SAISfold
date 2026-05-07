@@ -10,6 +10,8 @@ import numpy as np
 import pandas as pd
 from Bio.PDB import MMCIFParser
 
+from my_01_study.utils.root_utils import root_path_02
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from openfold.np import residue_constants as rc
 
@@ -24,7 +26,7 @@ except ImportError:
 
 def create_9dcf_data():
     # Paths
-    embed_path = '/inspire/ssd/project/sais-bio/public/xiangwenkai/Protenix_v1/extract_embedding/output/embeddings_npz/9DCF_seed101.npz'
+    embed_path = f'{root_path_02}/public/xiangwenkai/Protenix_v1/extract_embedding/output/embeddings_npz/9DCF_seed101.npz'
     cif_path = 'overfitting_data/9DCF/9dcf.cif'
     output_dir = 'overfitting_data/9DCF'
     os.makedirs(output_dir, exist_ok=True)

@@ -21,6 +21,7 @@ import pandas as pd
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
+from my_01_study.utils.root_utils import root_path_02
 # 这里的protenix应该是本项目自带的protenix
 # openfold/data/data_pipeline.py  # openfold.data.data_pipeline
 # from openfold.data.data_pipeline import DataPipeline  # 报错使用下面方式...
@@ -164,7 +165,7 @@ if __name__ == "__main__":
         "--input_path",
         type=Path,
         # default=None,
-        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+        default=f'{root_path_02}/'
                 # 'Nucleic_protein_res4.0/cifs_Nucleic_and_protein',
                 'Nucleic_protein_res4.0/cifs_Nucleic_only',
         help="Path to the input directory containing MMCIF files or a .txt file listing MMCIF file paths.",
@@ -174,7 +175,7 @@ if __name__ == "__main__":
         "--output_csv",
         type=Path,
         # default=None,
-        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+        default=f'{root_path_02}/'
                 # 'train_mmcif_csv/cifs_Nucleic_and_protein',
                 'train_mmcif_csv/cifs_Nucleic_only',
         help="Path to the output CSV file where indices will be saved.",
@@ -184,7 +185,7 @@ if __name__ == "__main__":
         "--bio_output_dir",
         type=Path,
         # default=None,
-        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+        default=f'{root_path_02}/'
                 # 'train_mmcif_bio/cifs_Nucleic_and_protein',
                 'train_mmcif_bio/cifs_Nucleic_only',
         help="Directory where bioassembly outputs will be saved.",
@@ -193,7 +194,8 @@ if __name__ == "__main__":
         "-c",
         "--cluster_file",
         type=Path,
-        default=None,
+        # default=None,
+        default=f'{root_path_02}/sais_bio/clusters-by-entity-40.txt',
         help="Path to the cluster txt file, if any",
     )
 

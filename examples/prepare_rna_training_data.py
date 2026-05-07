@@ -21,6 +21,9 @@ Usage:
 
 import os
 import sys
+
+from my_01_study.utils.root_utils import root_path_02
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import argparse
@@ -505,7 +508,7 @@ def main():
     parser.add_argument('--n_frames', type=int, default=100,
                         help='Number of trajectory frames to generate')
     parser.add_argument('--protenix_embed_dir', type=str,
-                        default='/inspire/ssd/project/sais-bio/public/xiangwenkai/Protenix_v1/extract_embedding/output/embeddings_npz',
+                        default=f'{root_path_02}/public/xiangwenkai/Protenix_v1/extract_embedding/output/embeddings_npz',
                         help='Base directory for Protenix embeddings')
     
     args = parser.parse_args()
