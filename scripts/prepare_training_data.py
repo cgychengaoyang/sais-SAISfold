@@ -175,7 +175,7 @@ if __name__ == "__main__":
         "--output_csv",
         type=Path,
         # default=None,
-        default=f'{root_path_02}/'
+        default=f'{root_path_02}/sais_bio/'
                 # 'train_mmcif_csv/cifs_Nucleic_and_protein',
                 'train_mmcif_csv/cifs_Nucleic_only',
         help="Path to the output CSV file where indices will be saved.",
@@ -185,7 +185,7 @@ if __name__ == "__main__":
         "--bio_output_dir",
         type=Path,
         # default=None,
-        default=f'{root_path_02}/'
+        default=f'{root_path_02}/sais_bio/'
                 # 'train_mmcif_bio/cifs_Nucleic_and_protein',
                 'train_mmcif_bio/cifs_Nucleic_only',
         help="Directory where bioassembly outputs will be saved.",
