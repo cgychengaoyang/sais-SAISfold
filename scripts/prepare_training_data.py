@@ -21,8 +21,15 @@ import pandas as pd
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
-from protenix.data.data_pipeline import DataPipeline
-from protenix.utils.file_io import dump_gzip_pickle
+# 这里的protenix应该是本项目自带的protenix
+# openfold/data/data_pipeline.py  # openfold.data.data_pipeline
+# from openfold.data.data_pipeline import DataPipeline  # 报错使用下面方式...
+# src/data/protenix_pipeline/data_pipeline.py
+from src.data.protenix_pipeline.data_pipeline import DataPipeline
+
+# src/model/protenix/utils/file_io.py  # src.model.protenix.utils.file_io
+# src/data/protenix_pipeline/file_io.py
+from src.model.protenix.utils.file_io import dump_gzip_pickle
 
 
 def gen_a_bioassembly_data(
@@ -156,21 +163,30 @@ if __name__ == "__main__":
         "-i",
         "--input_path",
         type=Path,
-        default=None,
+        # default=None,
+        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+                # 'Nucleic_protein_res4.0/cifs_Nucleic_and_protein',
+                'Nucleic_protein_res4.0/cifs_Nucleic_only',
         help="Path to the input directory containing MMCIF files or a .txt file listing MMCIF file paths.",
     )
     parser.add_argument(
         "-o",
         "--output_csv",
         type=Path,
-        default=None,
+        # default=None,
+        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+                # 'train_mmcif_csv/cifs_Nucleic_and_protein',
+                'train_mmcif_csv/cifs_Nucleic_only',
         help="Path to the output CSV file where indices will be saved.",
     )
     parser.add_argument(
         "-b",
         "--bio_output_dir",
         type=Path,
-        default=None,
+        # default=None,
+        default='/mnt/d/develop/PyCharm_workspaces/study_01/my_00_data/sais/data_16/old_data/'
+                # 'train_mmcif_bio/cifs_Nucleic_and_protein',
+                'train_mmcif_bio/cifs_Nucleic_only',
         help="Directory where bioassembly outputs will be saved.",
     )
     parser.add_argument(
@@ -192,7 +208,7 @@ if __name__ == "__main__":
         "-n",
         "--n_cpu",
         type=int,
-        default=1,
+        default=8,
         help="Number of worker processes to use. Defaults to 1.",
     )
 
